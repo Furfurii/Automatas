@@ -1,22 +1,4 @@
-"""
-main.py
--------
-Interfaz de consola (menú de texto) del proyecto.
 
-Conecta las tres piezas:
-    ValidadorRegistro  -> decide si una fila es válida (regex)
-    RepositorioConexiones -> lee el CSV, guarda válidos y descartados, consulta
-    ExportadorExcel    -> exporta el resultado a .xlsx
-
-Ejercicio 1 (Grupo): seguimiento de un usuario en un rango de fechas para ver
-su desplazamiento por el edificio a través del Access Point (MAC_AP) al que se
-fue conectando.
-
-Integrantes:
-    - BARREDO VON JASTRZEMBSKI, Santiago Manuel
-    - FURFURI, Franco
-    - ZARZUR, Matias Andres
-"""
 
 import os
 

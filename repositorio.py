@@ -1,15 +1,4 @@
-"""
-repositorio.py
---------------
-Se encarga de leer el archivo CSV, validar cada registro con el ValidadorRegistro
-y guardar en memoria:
-    - los registros VÁLIDOS  -> en una lista de diccionarios (como pide el TP)
-    - los registros DESCARTADOS -> en otra lista, para mostrarlos al final
 
-También ofrece las consultas que necesita la aplicación:
-    - lista de usuarios distintos
-    - seguimiento de un usuario en un rango de fechas
-"""
 
 import csv
 

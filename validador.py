@@ -1,16 +1,4 @@
-"""
-validador.py
-------------
-Acá vive el corazón del trabajo práctico: la validación de registros usando
-EXPRESIONES REGULARES (módulo `re` de Python).
 
-Idea teórica (Teoría de Autómatas):
-    Cada campo del CSV es una "cadena". Para cada campo definimos un "lenguaje"
-    (el conjunto de valores correctos) mediante una expresión regular. Validar
-    un campo es preguntar: "¿esta cadena pertenece al lenguaje?". Eso es,
-    exactamente, lo que hace un autómata finito: leer la cadena y decidir
-    ACEPTA o RECHAZA. La regex es la forma escrita y compacta de ese autómata.
-"""
 
 import re
 

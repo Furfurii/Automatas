@@ -1,9 +1,4 @@
-"""
-exportador.py
--------------
-Toma el resultado de un seguimiento y lo exporta a un archivo Excel (.xlsx)
-usando la librería openpyxl. Una sola responsabilidad: armar la planilla.
-"""
+
 
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment
