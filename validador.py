@@ -4,11 +4,7 @@ import re
 
 
 class ValidadorRegistro:
-    """Valida un registro (una fila del CSV) campo por campo con regex.
 
-    Si TODOS los campos cumplen su patrón y ninguno está vacío, el registro
-    es válido. Si alguno falla, el registro se descarta.
-    """
 
     def __init__(self):
         # Compilamos cada expresión regular UNA sola vez (con re.compile).
@@ -45,14 +41,7 @@ class ValidadorRegistro:
         self.re_tipo = re.compile(r"Wireless-802\.11")
 
     def validar(self, fila):
-        """Recibe una fila (lista de columnas) y devuelve una tupla:
-            (es_valido, motivo)
-        donde 'es_valido' es True/False y 'motivo' explica el primer error
-        encontrado (cadena vacía si el registro es válido).
 
-        Usamos .fullmatch(): exige que TODA la cadena calce con el patrón,
-        no solo un pedacito. Si no calza, devuelve None.
-        """
         # Las filas corruptas suelen tener menos columnas de lo esperado.
         if len(fila) < 16:
             return (False, "fila incompleta (tiene menos de 16 columnas)")

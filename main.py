@@ -16,8 +16,7 @@ ARCHIVO_CSV = "export-2019-to-now-v4.csv"
 # ---------------------------------------------------------------------------
 
 def pedir_fecha(validador, mensaje):
-    """Pide una fecha por teclado y la valida con la MISMA regex de fechas
-    del validador. No deja avanzar hasta que el formato sea AAAA-MM-DD."""
+
     while True:
         valor = input(mensaje).strip()
         if validador.re_fecha.fullmatch(valor):
@@ -26,8 +25,6 @@ def pedir_fecha(validador, mensaje):
 
 
 def elegir_usuario(repositorio):
-    """Permite buscar y elegir un usuario de la lista. Devuelve el usuario
-    elegido o None si el usuario cancela."""
     todos = repositorio.usuarios()
     while True:
         texto = input(
@@ -67,7 +64,6 @@ def elegir_usuario(repositorio):
 
 
 def mostrar_tabla(registros, repositorio):
-    """Imprime el seguimiento en una tabla simple en la consola."""
     if not registros:
         print("\n  No hay conexiones de ese usuario en ese rango de fechas.")
         return

@@ -5,7 +5,7 @@ from openpyxl.styles import Font, Alignment
 
 
 class ExportadorExcel:
-    """Exporta una lista de registros de seguimiento a un archivo Excel."""
+
 
     # (clave del diccionario, título de la columna en Excel). El orden de esta
     # lista define el orden de las columnas en la planilla.
@@ -22,7 +22,7 @@ class ExportadorExcel:
     ]
 
     def exportar(self, registros, usuario, desde, hasta, repositorio, ruta_salida):
-        """Crea y guarda el archivo .xlsx con el seguimiento del usuario."""
+
         libro = Workbook()
         hoja = libro.active
         hoja.title = "Seguimiento"
