@@ -1,0 +1,16 @@
+﻿# Datos: no subir el CSV (pesa demasiado para GitHub)
+*.csv
+
+# Entorno virtual de Python
+venv/
+.venv/
+
+# Cache de Python
+__pycache__/
+*.pyc
+
+# Exportaciones generadas por el programa
+*.xlsx
+
+# Config de VS Code
+.vscode/
