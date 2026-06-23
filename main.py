@@ -1,5 +1,3 @@
-
-
 import os
 
 from validador import ValidadorRegistro
@@ -16,7 +14,8 @@ ARCHIVO_CSV = "export-2019-to-now-v4.csv"
 # ---------------------------------------------------------------------------
 
 def pedir_fecha(validador, mensaje):
-
+    """Pide una fecha por teclado y la valida con la MISMA regex de fechas
+    del validador. No deja avanzar hasta que el formato sea AAAA-MM-DD."""
     while True:
         valor = input(mensaje).strip()
         if validador.re_fecha.fullmatch(valor):
@@ -25,6 +24,8 @@ def pedir_fecha(validador, mensaje):
 
 
 def elegir_usuario(repositorio):
+    """Permite buscar y elegir un usuario de la lista. Devuelve el usuario
+    elegido o None si el usuario cancela."""
     todos = repositorio.usuarios()
     while True:
         texto = input(
@@ -64,6 +65,7 @@ def elegir_usuario(repositorio):
 
 
 def mostrar_tabla(registros, repositorio):
+    """Imprime el seguimiento en una tabla simple en la consola."""
     if not registros:
         print("\n  No hay conexiones de ese usuario en ese rango de fechas.")
         return
@@ -141,18 +143,32 @@ def opcion_seguimiento(repositorio, validador, exportador):
             print(f"  Listo. Archivo guardado: {os.path.abspath(nombre)}")
 
 
-def opcion_descartados(repositorio):
+def opcion_descartados(repositorio, exportador):
     print("\n=== Registros descartados ===")
     if not repositorio.descartados:
         print("  No se descartó ningún registro.")
         return
 
     print(f"  Se descartaron {len(repositorio.descartados)} registros.")
-    cantidad = input("  ¿Cuántos querés ver? (Enter = 10): ").strip()
+    cantidad = input("  ¿Cuántos querés ver en pantalla? (Enter = 10): ").strip()
     cantidad = int(cantidad) if cantidad.isdigit() else 10
 
     for numero_linea, motivo, _fila in repositorio.descartados[:cantidad]:
         print(f"  Línea {numero_linea}: {motivo}")
+
+    # Exportar TODOS los inválidos a Excel para poder analizarlos en detalle.
+    respuesta = input(
+        "\n  ¿Exportar TODOS los inválidos a Excel para analizarlos? (s/n): "
+    ).strip().lower()
+    if respuesta == "s":
+        nombre = input("  Nombre del archivo (Enter = invalidos.xlsx): ").strip()
+        if nombre == "":
+            nombre = "invalidos.xlsx"
+        if not nombre.endswith(".xlsx"):
+            nombre += ".xlsx"
+        exportador.exportar_invalidos(
+            repositorio.descartados, repositorio.cabecera, nombre)
+        print(f"  Listo. Archivo guardado: {os.path.abspath(nombre)}")
 
 
 # ---------------------------------------------------------------------------
@@ -195,7 +211,7 @@ def main():
         elif opcion == "2":
             opcion_seguimiento(repositorio, validador, exportador)
         elif opcion == "3":
-            opcion_descartados(repositorio)
+            opcion_descartados(repositorio, exportador)
         elif opcion == "0":
             print("\nHasta luego.")
             break

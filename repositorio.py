@@ -1,10 +1,8 @@
-
-
 import csv
 
 
 class RepositorioConexiones:
-
+    """Almacena los registros de conexión wifi y permite consultarlos."""
 
     def __init__(self, validador):
         # Recibe el validador "desde afuera" (inyección de dependencia):
@@ -14,13 +12,15 @@ class RepositorioConexiones:
         self.registros = []      # lista de diccionarios -> registros válidos
         self.descartados = []    # lista de tuplas (nro_linea, motivo, fila)
         self.etiquetas_ap = {}   # MAC_AP -> nombre corto ("Punto 01", ...)
+        self.cabecera = []       # nombres de las columnas del CSV (primera fila)
 
     def cargar(self, ruta_csv):
-
+        """Lee el CSV línea por línea, valida cada fila y la guarda donde
+        corresponda. Devuelve la cantidad total de filas leídas."""
         total = 0
         with open(ruta_csv, encoding="utf-8", newline="") as archivo:
             lector = csv.reader(archivo)
-            next(lector)            # salteamos la primera fila (los títulos)
+            self.cabecera = next(lector)   # guardamos la primera fila (títulos)
             numero_linea = 1
             for fila in lector:
                 numero_linea += 1
@@ -36,7 +36,8 @@ class RepositorioConexiones:
         return total
 
     def _a_diccionario(self, fila):
-
+        """Convierte una fila válida (lista) en un diccionario con nombres
+        claros. Los campos numéricos se pasan a int para poder operarlos."""
         return {
             "usuario": fila[3].strip(),
             "ip_ap": fila[4].strip(),
@@ -52,19 +53,17 @@ class RepositorioConexiones:
         }
 
     def _armar_etiquetas_ap(self):
-
+        """A cada Access Point distinto le asignamos un nombre corto y estable"""
         macs_distintas = sorted({r["mac_ap"] for r in self.registros})
         for indice, mac in enumerate(macs_distintas, start=1):
             self.etiquetas_ap[mac] = f"Punto {indice:02d}"
 
     def usuarios(self):
-
+        """Devuelve la lista ordenada de usuarios distintos (para el filtro)."""
         return sorted({r["usuario"] for r in self.registros})
 
     def seguimiento(self, usuario, fecha_desde, fecha_hasta):
-
-
-
+        """Devuelve los registros de un usuario dentro de un rango de fechas"""
         resultado = [
             r for r in self.registros
             if r["usuario"] == usuario
@@ -75,5 +74,5 @@ class RepositorioConexiones:
         return resultado
 
     def etiqueta(self, mac_ap):
-
+        """Devuelve el nombre corto de un Access Point (o la MAC si no está)."""
         return self.etiquetas_ap.get(mac_ap, mac_ap)
