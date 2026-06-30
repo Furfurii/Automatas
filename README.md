@@ -13,7 +13,7 @@ Antes de poder consultar, el programa **lee y valida** todos los registros con *
 
 **Requisitos:** Python 3.8 o superior.
 
-**1.** Abrí una terminal en la carpeta del proyecto (en VS Code: `Ctrl+ñ`).
+**1.** Abrí una terminal en la carpeta del proyecto.
 
 **2.** *(Recomendado)* Creá y activá un entorno virtual:
 

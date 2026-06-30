@@ -5,9 +5,7 @@ class RepositorioConexiones:
     """Almacena los registros de conexión wifi y permite consultarlos."""
 
     def __init__(self, validador):
-        # Recibe el validador "desde afuera" (inyección de dependencia):
-        # así el repositorio no sabe NADA de regex, solo le pregunta si una
-        # fila es válida. Cada clase tiene una única responsabilidad.
+        # Recibe el validador.
         self.validador = validador
         self.registros = []      # lista de diccionarios -> registros válidos
         self.descartados = []    # lista de tuplas (nro_linea, motivo, fila)
