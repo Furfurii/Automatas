@@ -1,5 +1,3 @@
-
-
 import re
 
 
@@ -7,9 +5,6 @@ class ValidadorRegistro:
 
 
     def __init__(self):
-        # Compilamos cada expresión regular UNA sola vez (con re.compile).
-        # Como vamos a validar un millón de filas, compilar una vez y reusar
-        # es mucho más eficiente que recompilar en cada fila.
 
         # Fecha: 4 dígitos - 2 dígitos - 2 dígitos   ->  2019-02-07
         self.re_fecha = re.compile(r"\d{4}-\d{2}-\d{2}")

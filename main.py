@@ -5,13 +5,10 @@ from repositorio import RepositorioConexiones
 from exportador import ExportadorExcel
 
 
-# Nombre del archivo CSV. Debe estar en la misma carpeta que este programa.
 ARCHIVO_CSV = "export-2019-to-now-v4.csv"
 
-
-# ---------------------------------------------------------------------------
 # Funciones auxiliares de la interfaz
-# ---------------------------------------------------------------------------
+
 
 def pedir_fecha(validador, mensaje):
     """Pide una fecha por teclado y la valida con la MISMA regex de fechas
